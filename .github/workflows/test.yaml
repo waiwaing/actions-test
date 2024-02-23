@@ -14,6 +14,7 @@ jobs:
           sleep 15
           echo Hello
   step2:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Job 2
