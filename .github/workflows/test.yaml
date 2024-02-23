@@ -1,0 +1,22 @@
+name: Octo Organization CI
+
+on: 
+  - push
+  - workflow_dispatch
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Job 1
+        run: |
+          sleep 15
+          echo Hello
+  step2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Job 2
+        run: |
+          sleep 15
+          echo World
