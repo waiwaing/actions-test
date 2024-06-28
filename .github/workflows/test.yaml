@@ -7,10 +7,11 @@ on:
 jobs:
   skip_me:
     runs-on: ubuntu-latest
-    if: false
     continue-on-error: true
     steps: 
       - name: Pretend Job
+        if: false
+        continue-on-error: true
         run: echo "No" 
 
   build:
