@@ -13,6 +13,7 @@ jobs:
         run: echo "No" 
 
   build:
+    needs: skip_me
     runs-on: ubuntu-latest
     steps:
       - name: Job 1
