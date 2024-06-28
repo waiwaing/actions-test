@@ -8,6 +8,7 @@ jobs:
   skip_me:
     runs-on: ubuntu-latest
     if: false
+    continue-on-error: true
     steps: 
       - name: Pretend Job
         run: echo "No" 
