@@ -5,9 +5,15 @@ on:
   - workflow_dispatch
   
 jobs:
+  skip_me:
+    runs-on: ubuntu-latest
+    if: false
+    steps: 
+      - name: Pretend Job
+        run: echo "No" 
+
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Job 1
         run: |
