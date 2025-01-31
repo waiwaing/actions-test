@@ -1,0 +1,44 @@
+name: Subcall
+on:
+  workflow_call:
+    inputs:
+      workflowId:  
+        description: "Run ID of the parent build pipeline"
+        required: true
+        type: string
+      attemptNumber:  
+        description: "Attempt number"  
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: read
+  actions: write
+
+jobs:
+  wait_for_artifacts:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      WORKFLOW_ID: ${{ inputs.workflowId }}
+      ATTEMPT_NUMBER: ${{ inputs.attemptNumber }}
+    steps:
+      - run: |
+          #!/usr/bin/env bash
+          while : ; do
+            if [[ $WORKFLOW_ID != "" ]]
+              attempt=$(gh api \
+                -H "Accept: application/vnd.github+json" \
+                -H "X-Github-Api-Version: 2022-11-28" \
+                "/repos/${{ github.repository }}/actions/runs/$WORKFLOW_ID/attempts/$ATTEMPT_NUMBER")
+
+              status=$(echo $attempt | jq -er "status")
+
+              echo $status
+            fi
+            
+            sleep 15
+          done
