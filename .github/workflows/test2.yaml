@@ -33,14 +33,13 @@ jobs:
             if [[ $WORKFLOW_ID != "" ]]; then
               url="/repos/${{ github.repository }}/actions/runs/$WORKFLOW_ID/attempts/$ATTEMPT_NUMBER"
 
-              echo $url
               attempt=$(gh api \
                 -H "Accept: application/vnd.github+json" \
                 -H "X-Github-Api-Version: 2022-11-28" \
                 "$url")
 
-              echo $attempt
-              status=$(echo "$attempt" | jq -er "status")
+              status=$(echo "$attempt" | jq -er ".status")
+              status=$(echo "$attempt" | jq -er ".conclusion")
 
               echo $status
             fi
