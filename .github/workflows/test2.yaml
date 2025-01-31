@@ -37,7 +37,7 @@ jobs:
                 -H "X-Github-Api-Version: 2022-11-28" \
                 "/repos/${{ github.repository }}/actions/runs/$WORKFLOW_ID/attempts/$ATTEMPT_NUMBER/jobs")
 
-              failed_jobs=$(echo "$jobs" | jq -r '[.jobs[] | select(.conclusion == "failed")] | length')
+              failed_jobs=$(echo "$jobs" | jq -r '[.jobs[] | select(.conclusion == "failure")] | length')
               job_concls=$(echo "$jobs" | jq -r '.jobs[].conclusion')
 
               echo $job_concls
