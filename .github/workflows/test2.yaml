@@ -31,21 +31,17 @@ jobs:
           #!/usr/bin/env bash
           while : ; do
             if [[ $WORKFLOW_ID != "" ]]; then
-              url="/repos/${{ github.repository }}/actions/runs/$WORKFLOW_ID/attempts/$ATTEMPT_NUMBER"
 
-              attempt=$(gh api \
+              jobs=$(gh api \
                 -H "Accept: application/vnd.github+json" \
                 -H "X-Github-Api-Version: 2022-11-28" \
-                "$url")
+                "/repos/${{ github.repository }}/actions/runs/$WORKFLOW_ID/attempts/$ATTEMPT_NUMBER/jobs")
 
-              echo "hi"
-              status=$(echo "$attempt" | jq -r ".status")
-              echo "hey"
-              conclu=$(echo "$attempt" | jq -r ".conclusion")
+              failed_jobs=$(echo $jobs | jq -r '[.jobs[] | select(.conclusion == "failed")] | length)
 
-              echo $status
-              echo $conclu
-              echo "---"
+              if [[ $failed_jobs -gt 0 ]]; then
+                exit 6
+              fi 
             fi
             
             sleep 15
