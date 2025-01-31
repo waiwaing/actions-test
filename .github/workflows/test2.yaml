@@ -25,6 +25,7 @@ jobs:
     env:
       WORKFLOW_ID: ${{ inputs.workflowId }}
       ATTEMPT_NUMBER: ${{ inputs.attemptNumber }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - run: |
           #!/usr/bin/env bash
