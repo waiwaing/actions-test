@@ -39,9 +39,9 @@ jobs:
                 "$url")
 
               echo "hi"
-              status=$(echo "$attempt" | jq -er ".status")
+              status=$(echo "$attempt" | jq -r ".status")
               echo "hey"
-              conclu=$(echo "$attempt" | jq -er ".conclusion")
+              conclu=$(echo "$attempt" | jq -r ".conclusion")
 
               echo $status
               echo $conclu
