@@ -38,6 +38,10 @@ jobs:
                 "/repos/${{ github.repository }}/actions/runs/$WORKFLOW_ID/attempts/$ATTEMPT_NUMBER/jobs")
 
               failed_jobs=$(echo "$jobs" | jq -r '[.jobs[] | select(.conclusion == "failed")] | length')
+              job_concls=$(echo "$jobs" | jq -r '.jobs[].conclusion')
+
+              echo $job_concls
+              echo " ---"
 
               if [[ $failed_jobs -gt 0 ]]; then
                 exit 6
