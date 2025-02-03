@@ -10,6 +10,11 @@ on:
         description: "Attempt number"  
         required: true
         type: string
+  workflow_dispatch:
+    inputs:
+      hi:
+        description: "Asdf"
+        type: string
 
 permissions:
   id-token: write
