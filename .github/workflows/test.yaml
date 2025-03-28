@@ -10,42 +10,16 @@ permissions:
   actions: write
 
 jobs:
-  skip_me:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps: 
-      - name: Pretend Job
-        if: false
-        continue-on-error: true
-        run: echo "No" 
-
-  build:
-    needs: skip_me
-    runs-on: ubuntu-latest
-    steps:
-      - name: Job 1
-        run: |
-          sleep 30
-          exit 1
-
   step2:
-    needs: build
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Job 2
+        shell: pwsh
         run: |
-          sleep 15
-          echo World
-
-  test2:
-    uses: ./.github/workflows/test2.yaml
-    with:
-      workflowId: ${{ github.run_id }}
-      attemptNumber: ${{ github.run_attempt }}
-    permissions:
-      id-token: write
-      contents: read
-      actions: write
-    
-      
-      
+          Write-Output (node --version)
+          Write-Output (Get-Command node).Path
+          ls 'C:\hostedtoolcache\windows\'
+          ls 'C:\hostedtoolcache\windows\node'
+          ls 'C:\hostedtoolcache\windows\node\22.14.0'
+          ls 'C:\hostedtoolcache\windows\node\22.14.0\x64'
+          Write-Output "QQ"
