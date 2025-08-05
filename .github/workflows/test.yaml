@@ -14,10 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - shell: bash
-        run: return 1
+        run: exit 1
 
   asdf:
     if: failure()
+    needs:
+      - step
     runs-on: ubuntu-latest
     steps:
       - shell: bash
