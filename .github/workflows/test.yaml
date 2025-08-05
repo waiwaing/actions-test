@@ -10,21 +10,34 @@ permissions:
   actions: write
 
 jobs:
-  step2:
-    runs-on: windows-latest
+  step:
+    runs-on: ubuntu-latest
     steps:
-      - name: Job 2
-        shell: pwsh
-        run: |
-          Write-Output (node --version)
-          Write-Output (Get-Command node).Path
-          ls 'C:\hostedtoolcache\windows\'
-          ls 'C:\hostedtoolcache\windows\node'
-          ls 'C:\hostedtoolcache\windows\node\22.14.0'
-          ls 'C:\hostedtoolcache\windows\node\22.14.0\x64'
-          Write-Output "QQ"
-      - name: Prepare node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.*
-          cache: npm
+      - shell: bash
+        run: return 1
+
+  asdf:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: sleep 500
+    
+  # step2:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Job 2
+  #       shell: pwsh
+  #       run: |
+  #         Write-Output (node --version)
+  #         Write-Output (Get-Command node).Path
+  #         ls 'C:\hostedtoolcache\windows\'
+  #         ls 'C:\hostedtoolcache\windows\node'
+  #         ls 'C:\hostedtoolcache\windows\node\22.14.0'
+  #         ls 'C:\hostedtoolcache\windows\node\22.14.0\x64'
+  #         Write-Output "QQ"
+  #     - name: Prepare node
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 22.*
+          # cache: npm
