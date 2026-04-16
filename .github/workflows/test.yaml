@@ -17,7 +17,7 @@ jobs:
         run: exit 1
 
   asdf:
-    if: failure()
+    if: cancelled()
     needs:
       - step
     runs-on: ubuntu-latest
